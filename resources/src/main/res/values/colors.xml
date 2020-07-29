@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/color_ff365b</color>
+    <color name="colorPrimaryDark">#de1a3d</color>
+    <color name="colorAccent">@color/color_ff365b</color>
+
+    <color name="color_e6e6e6">#E6E6E6</color>
+    <color name="color_a4a4a4">#a4a4a4</color>
+
+    <color name="color_fff">#fff</color>
+    <color name="color_fff_30">#4DFFFFFF</color>
+
+
+    <color name="color_black_white">#000</color>
+    <color name="color_white_black">#FFF</color>
+    <color name="color_toolbar">@color/color_white_black</color>
+
+    <color name="color_ff365b">#ff365b</color>
+
+</resources>

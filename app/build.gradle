@@ -1,0 +1,134 @@
+import dependencies.Dep
+import dependencies.ModuleNames
+import dependencies.Versions
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+
+    compileSdkVersion Versions.androidCompileSdkVersion
+
+    defaultConfig {
+        applicationId "io.eos"
+        minSdkVersion Versions.androidMinSdkVersion
+        targetSdkVersion Versions.androidTargetSdkVersion
+
+        versionCode Versions.androidVersionCode
+        versionName Versions.androidVersionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+
+        vectorDrawables.useSupportLibrary = true
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.incremental": "true"]
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            ndk {
+                abiFilters 'arm64-v8a', 'x86'
+            }
+        }
+        release {
+            ndk {
+                abiFilters 'arm64-v8a'
+            }
+
+
+            postprocessing {
+                proguardFiles 'proguard-rules.pro', 'proguard-rules-production.pro'
+                obfuscate = true
+                optimizeCode = false
+                removeUnusedCode = true
+                removeUnusedResources = true
+            }
+        }
+    }
+
+    lintOptions {
+        lintConfig file("${project.projectDir}/lint.xml")
+
+        xmlReport isCi
+        htmlReport !isCi
+
+        xmlOutput file("lint-results.xml")
+        htmlOutput file("lint-results.html")
+
+        checkReleaseBuilds !isCi
+        abortOnError !isCi
+    }
+    packagingOptions {
+        doNotStrip '*/arm64-v8a/*.so'
+        doNotStrip '*/armeabi-v7a/*.so'
+        exclude 'META-INF/*.kotlin_module'
+        exclude 'META-INF/*.version'
+        exclude 'META-INF/proguard/*.pro'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude 'lib/x86_64/darwin/libscrypt.dylib'
+        exclude 'lib/x86_64/freebsd/libscrypt.so'
+        exclude 'lib/x86_64/linux/libscrypt.so'
+    }
+}
+
+dependencies {
+
+    implementation Dep.AndroidX.recyclerView
+
+    implementation project(ModuleNames.CoreComponent)
+    implementation project(ModuleNames.Resources)
+
+    implementation Dep.gson
+
+    //Network
+    implementation Dep.Okhttp.client
+    implementation Dep.Okhttp.log
+    implementation Dep.Retrofit.core
+    implementation Dep.Retrofit.gson
+
+    implementation Dep.Kotlin.stdlibJvm
+    implementation Dep.Kotlin.coroutines
+
+
+    compileOnly Dep.Dagger.core
+    implementation Dep.Dagger.androidSupport
+    implementation Dep.Dagger.android
+    kapt Dep.Dagger.compiler
+    kapt Dep.Dagger.androidProcessor
+
+    implementation Dep.Timber.android
+
+    implementation project(ModuleNames.Transaction.ui)
+
+    //Test
+    testImplementation Dep.Test.junit
+    testImplementation Dep.Test.kotlinTestAssertions
+
+    androidTestImplementation Dep.Test.testRunner
+    androidTestImplementation Dep.Test.espressoCore
+
+}
+tasks.withType(KotlinCompile).all {
+    kotlinOptions {
+        freeCompilerArgs = [
+                '-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi',
+                '-Xuse-experimental=kotlinx.coroutines.ObsoleteCoroutinesApi',
+                '-XXLanguage:+InlineClasses'
+        ]
+    }
+}
+

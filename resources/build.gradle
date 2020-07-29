@@ -1,0 +1,23 @@
+import dependencies.Dep
+import dependencies.ModuleNames
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+apply from: rootProject.file('gradleScript/android.gradle')
+
+dependencies {
+
+    implementation Dep.lottie
+
+    implementation Dep.AndroidX.appCompat
+    implementation Dep.AndroidX.design
+    implementation Dep.Kotlin.stdlibJvm
+    implementation Dep.Kotlin.coroutines
+    implementation Dep.AndroidX.constraint
+
+    testImplementation Dep.Test.junit
+    androidTestImplementation Dep.Test.testRunner
+    androidTestImplementation Dep.Test.espressoCore
+}

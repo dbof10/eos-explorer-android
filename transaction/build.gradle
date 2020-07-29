@@ -1,0 +1,57 @@
+
+import dependencies.Dep
+import dependencies.ModuleNames
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+apply from: rootProject.file('gradleScript/android.gradle')
+
+dependencies {
+
+
+    implementation project(ModuleNames.CoreComponent)
+    implementation project(ModuleNames.Resources)
+
+
+    implementation Dep.Kotlin.stdlibJvm
+    implementation Dep.Kotlin.coroutines
+
+
+    implementation Dep.AndroidX.recyclerView
+    implementation Dep.AndroidX.constraint
+    implementation Dep.AndroidX.appCompat
+    implementation Dep.AndroidX.activity
+    implementation Dep.AndroidX.fragmentKtx
+    implementation Dep.AndroidX.design
+
+    implementation Dep.Facebook.shimmer
+
+    implementation Dep.AndroidX.lifecycleExtensions
+    implementation Dep.AndroidX.lifecycleViewModel
+
+
+    implementation Dep.gson
+    implementation Dep.animator
+
+    implementation Dep.Retrofit.core
+
+
+    implementation Dep.Timber.android
+
+    compileOnly Dep.Dagger.core
+    kapt Dep.Dagger.compiler
+    implementation Dep.Dagger.androidSupport
+    kapt Dep.Dagger.androidProcessor
+
+    testImplementation Dep.Test.junit
+    testImplementation Dep.Test.mockito
+    testImplementation Dep.Test.mockitok
+    testImplementation Dep.Kotlin.coroutinesTest
+    testImplementation Dep.Test.archCore
+    androidTestImplementation Dep.Test.testRunner
+    androidTestImplementation Dep.Test.espressoCore
+
+}

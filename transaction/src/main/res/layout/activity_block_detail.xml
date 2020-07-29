@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white_black"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:id="@+id/llContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/color_toolbar"
+            android:elevation="@dimen/elevation"
+            app:navigationIcon="@drawable/ic_arrow_back_black"
+            >
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/grid_4"
+                    android:layout_marginTop="@dimen/grid_4"
+                    android:text="Producer"
+                    android:textAppearance="@style/Text.Section1"
+                    />
+
+
+                <TextView
+                    android:id="@+id/tvProducer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/grid_4"
+                    android:layout_marginTop="@dimen/grid_3"
+                    android:textAppearance="@style/Text.Body1"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/grid_4"
+                    android:layout_marginTop="@dimen/grid_4"
+                    android:text="Producer Signature"
+                    android:textAppearance="@style/Text.Section1"
+                    />
+
+
+                <TextView
+                    android:id="@+id/tvProducerSignature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/grid_4"
+                    android:layout_marginTop="@dimen/grid_3"
+                    android:layout_marginEnd="@dimen/grid_4"
+                    android:textAppearance="@style/Text.Body1"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/grid_4"
+                    android:layout_marginTop="@dimen/grid_4"
+                    android:text="Transactions"
+                    android:textAppearance="@style/Text.Section1"
+                    />
+
+
+                <TextView
+                    android:id="@+id/tvTransactions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/grid_4"
+                    android:layout_marginTop="@dimen/grid_3"
+                    android:textAppearance="@style/Text.Body1"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/grid_4"
+                    android:layout_marginTop="@dimen/grid_4"
+                    android:text="Block detail"
+                    android:textAppearance="@style/Text.Section1"
+                    />
+
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/grid_4"
+                    android:layout_marginTop="@dimen/grid_3"
+                    android:checked="false"
+                    android:text="Show detail"
+                    />
+
+
+                <FrameLayout
+                    android:id="@+id/flDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <TextView
+                        android:id="@+id/tvBlockDetail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/grid_4"
+                        android:layout_marginTop="@dimen/grid_3"
+                        android:layout_marginEnd="@dimen/grid_4"
+                        android:background="@color/color_e6e6e6"
+                        android:textAppearance="@style/Text.Caption1"
+                        />
+
+
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/flPlaceholder"
+                        android:layout_width="match_parent"
+                        android:layout_height="196dp"
+                        android:layout_marginStart="@dimen/grid_4"
+                        android:layout_marginTop="@dimen/grid_3"
+                        android:layout_marginEnd="@dimen/grid_4"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/color_a4a4a4"
+                            />
+
+                    </com.facebook.shimmer.ShimmerFrameLayout>
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+
+    <include
+        android:id="@+id/vLoading"
+        layout="@layout/view_loading"
+        />
+
+    <include
+        android:id="@+id/vError"
+        layout="@layout/view_error"
+        android:visibility="gone"
+        />
+</FrameLayout>
